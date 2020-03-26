@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Blog\Admin;
 
+use App\Repositories\BlogCategoryRepository;
 use App\Repositories\BlogPostRepository;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\Request;
 
 
@@ -20,6 +22,10 @@ class PostController extends BaseController
      *
      */
     private $blogPostRepository;
+    /**
+     * @var BlogCategoryRepository|Application
+     */
+    private $blogCategoryRepository;
 
     /**
      * PostController constructor.
@@ -29,6 +35,7 @@ class PostController extends BaseController
     {
         parent::__construct();
         $this->blogPostRepository = app(BlogPostRepository::class);
+        $this->blogCategoryRepository = app(BlogCategoryRepository::class);
     }
 
 
@@ -56,7 +63,7 @@ class PostController extends BaseController
      */
     public function store(Request $request)
     {
-        //
+        dd(__METHOD__);
     }
 
     /**
@@ -74,11 +81,18 @@ class PostController extends BaseController
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit($id)
     {
-        dd(__METHOD__, $id);
+        $item = $this->blogPostRepository->getEdit($id);
+        if(empty($item)) {
+            abort(404);
+        }
+        $categoryList
+            = $this->blogCategoryRepository->getForComboBox();
+        return view('blog.admin.posts.edit',
+        compact('item', 'categoryList'));
     }
 
     /**
@@ -90,7 +104,8 @@ class PostController extends BaseController
      */
     public function update(Request $request, $id)
     {
-        dd(__METHOD__, $request->all());
+        dd(__METHOD__, $request->all(), $id);
+        dd($request, $id);
     }
 
     /**
@@ -101,6 +116,6 @@ class PostController extends BaseController
      */
     public function destroy($id)
     {
-        dd(__METHOD__, $id, route()->all);
+        dd(__METHOD__, $id, request()->all());
     }
 }

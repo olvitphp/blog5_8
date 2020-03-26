@@ -53,4 +53,4 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-// Route::resource('rest', 'RestTestController')->names('restTest');
+ Route::resource('test', 'RestTestController')->names('restTest');
