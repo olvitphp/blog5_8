@@ -9,7 +9,9 @@ use App\Http\Requests\BlogCategoryUpdateReequest;
 use App\Models\BlogCategory;
 use App\Repositories\BlogCategoryRepository;
 use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
+use Request;
 
 /**
  * Class CategoryController
@@ -73,29 +75,31 @@ class CategoryController extends BaseController
      * Store a newly created resource in storage.
      *
      * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function store(BlogCategoryCreateRequest $request)
     {
         $data = $request->input();
-        if (empty($data['slug'])) {
-            $data['slug'] = str_slug($data['title']);
+     /*
+       Ушло на обсервер
+       if (empty($data['slug'])) {
+           $data['slug'] = str::slug($data['title']);
         }
+     */
 
         // Создает объект но не добавлят в БД
 
         $item = (new BlogCategory())->create($data);
 
-//        dd($item);
-//        $item->save();
+
 
         if ($item) {
             return redirect()->route('blog.admin.categories.edit', [$item->id])
-                ->with(['success' => 'Успешно сохранено'])
-                ->withInput();
+                         ->with(['success' => 'Успешно сохранено']);
+
         } else {
             return back()->withErrors(['msg' => 'Ошибка сохранения'])
-                ->withInput();
+                         ->withInput();
         }
     }
 
@@ -126,9 +130,9 @@ class CategoryController extends BaseController
     /**
      * Update the specified resource in storage.
      *
-     * @param Request $request
+     * @param BlogCategoryUpdateReequest $request
      * @param int $id
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
 
        public function update(BlogCategoryUpdateReequest $request, $id)
@@ -144,10 +148,12 @@ class CategoryController extends BaseController
                 ->withInput();
         }
         $data = $request->all();
+        /*
+         * // Ушло на обсервер
        if (empty($data['slug'])) {
-           $data['slug'] = str_slug($data['title']);
+           $data['slug'] = st::slug($data['title']);
        }
-
+*/
 
         $result = $item->update($data);
 
