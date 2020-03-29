@@ -3,14 +3,42 @@
 namespace App\Models;
 
 
-use App\Models\User;
+
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ * Class BlogPost
+ * @package App\Models
+ *
+ * @property \App\Models\BlogCategory $category
+ * @property User                      $user
+ * @property string                    $title
+ * @property string                    $slug
+ * @property string                    $content_html
+ * @property string                    $content_raw
+ * @property string                    $excerpt
+ * @property string                    $published_it
+ * @property string                    $is_published
+ *
+ */
+
 class BlogPost extends Model
 {
     use SoftDeletes;
+
+    protected $fillable
+        = [
+            'title',
+            'slug',
+            'category_id',
+            'excerpt',
+            'content_raw',
+            'is_published',
+            'published_at',
+            'user_id'
+        ];
 
     /**
      * Кктегория статьи.
@@ -43,4 +71,5 @@ class BlogPost extends Model
     {
         // TODO: Implement resolveChildRouteBinding() method.
     }
+
 }

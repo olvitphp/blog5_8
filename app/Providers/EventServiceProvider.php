@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Observers\BlogCategoryObserver;
+use App\Observers\BlogPostObserver;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -18,7 +20,11 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        [ BlogCategoryObserver::class,],
+        [ BlogPostObserver::class,],
     ];
+
+
 
     /**
      * Register any events for your application.

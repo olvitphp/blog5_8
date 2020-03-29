@@ -25,7 +25,7 @@
                         </div>
                     </div>
                 </form>
-
+            </form>
 
                     @if($item->exists)
                     <br>
