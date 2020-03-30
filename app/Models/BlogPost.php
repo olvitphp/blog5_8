@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * Class BlogPost
  * @package App\Models
  *
- * @property \App\Models\BlogCategory $category
+ * @property BlogCategory $category
  * @property User                      $user
  * @property string                    $title
  * @property string                    $slug
@@ -28,6 +28,8 @@ class BlogPost extends Model
 {
     use SoftDeletes;
 
+    const UNKNOWN_USER =1;
+
     protected $fillable
         = [
             'title',
@@ -37,7 +39,7 @@ class BlogPost extends Model
             'content_raw',
             'is_published',
             'published_at',
-            'user_id'
+
         ];
 
     /**
@@ -55,7 +57,7 @@ class BlogPost extends Model
     /**
      *  // Автор статьи.
      *
-     * @return \Illuminate\\DataBase\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
 
     public function user()
@@ -71,5 +73,7 @@ class BlogPost extends Model
     {
         // TODO: Implement resolveChildRouteBinding() method.
     }
+
+
 
 }

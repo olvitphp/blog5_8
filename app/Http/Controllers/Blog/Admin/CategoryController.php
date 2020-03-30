@@ -46,7 +46,7 @@ class CategoryController extends BaseController
       //  $dsd = BlogCategory::all();
      //  $paginator = BlogCategory::paginate(15);
 
-      $paginator = $this->blogCategoryRepository->getAllWithPaginate(10);
+      $paginator = $this->blogCategoryRepository->getAllWithPaginate(25);
 
 // dd($dsd, $paginator);
 
