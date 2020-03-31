@@ -127,7 +127,7 @@ class CategoryController extends BaseController
        $v['hasGetMutator for title'] = $item->hasGetMutator('title');
        $v['toArray'] = $item->toArray();
 
-       dd($v, $item);
+
 
 
 
