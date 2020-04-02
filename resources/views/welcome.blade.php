@@ -89,7 +89,7 @@
                     <a href=blog/posts>Посты</a>
                     <a href=admin/blog/categories>Категории админка</a>
                     <a href=admin/blog/posts>Посты админка</a>
-                    <a href="https://nova.laravel.com">Nova</a>
+                    <a href=digging_deeper/collections>Collection</a>
                     <a href="https://forge.laravel.com">Forge</a>
                     <a href="https://github.com/laravel/laravel">GitHub</a>
                 </div>
